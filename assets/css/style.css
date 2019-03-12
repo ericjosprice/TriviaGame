@@ -1,0 +1,27 @@
+body {
+    background-image: url(../images/shlomo-shalev-745208-unsplash.jpg);
+    text-align: center;
+    color: purple;
+}
+.container {
+    margin: 150px auto 0 auto;
+    background: rgba(175, 143, 156, .6);
+    max-width: 940px;
+    padding:12px;
+}
+
+#image-holder {
+
+    /* Positioning */
+     margin: 0 auto;
+
+    /* Box-model */
+    width: 200px;
+
+    /* Typography */
+    text-align: center;
+
+  }
+  img{
+      margin:0 auto;
+  }
