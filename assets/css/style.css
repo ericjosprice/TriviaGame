@@ -1,10 +1,11 @@
 body {
     background-image: url(../images/shlomo-shalev-745208-unsplash.jpg);
     text-align: center;
-    color: purple;
+    color: rgb(104, 1, 104);
+    padding:20px;
 }
 .container {
-    margin: 150px auto 0 auto;
+    margin: 75px auto 0 auto;
     background: rgba(175, 143, 156, .6);
     max-width: 940px;
     padding:12px;

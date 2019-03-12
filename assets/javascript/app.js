@@ -33,12 +33,15 @@ $(document).ready(function () {
     var option = $(".answers")
     var question = $("#question")
     var nCounter = 0;
-    var nTime = 31;
+    var nTime = 30;
+    var nConverted=30;
     var nCorrect = 0;
     var nIncorrect = 0;
     var nUnanswered = 0;
     var intervalID;
     var qInterval;
+    var bAnswered=false;
+    // var bClockRunning=false;
 
     //varriables
     //=======================================================================
@@ -47,7 +50,7 @@ $(document).ready(function () {
 function start(){
     nextQuestion();
     intervalID = setInterval(count, 1000);
-    qInterval = setInterval(nextQuestion, 5000);
+    qInterval = setInterval(nextQuestion, 30000);
 }
     // display the question and options
 
@@ -56,12 +59,18 @@ function start(){
 
     function nextQuestion() {
         if (nCounter <= 5) {
+            // reset timers
+            // qInterval = setInterval(nextQuestion, 30000);
+            nTime = 30;
+
+            // change answered boolean to true
+            bAnswered= false;
             //clear gif
             option.children().remove();
             $("#image-holder").empty();
             question.text(aTrivia[nCounter].q)
-            // display correct choice
-            option.append("<span class='option' id='c'>" + aTrivia[nCounter].a + "</span>" + "<br>");
+            // display correct option
+            option.append("<span  id='c' class='option'>" + aTrivia[nCounter].a + "</span>" + "<br>");
             //wrong options
             for (var i = 0; i <= 2; i++) {
                 var newSpan = $("<span id='w'>");
@@ -76,15 +85,15 @@ function start(){
             // option.empty();
             question.empty();
             question.html("Correct: " +nCorrect+ "<br>" + "Incorrect: " + nIncorrect + "<br>" + "Unanswered: " + nUnanswered);
-            $(".answers").html("<span class='option' id='again'>Play Again?</span>");        
+            $(".answers").html("<span  id='again' class='option'>Play Again?</span>");   $("#image-holder").empty();   
         }
     }
 
     function count() {
 
         nTime--;
-        var converted = timeConverter(nTime);
-        $("#timer").text("Time remaining: " + converted);
+         nConverted = timeConverter(nTime);
+        $("#timer").text("Time remaining: " + nConverted);
     }
 
     function timeConverter(t) {
@@ -93,6 +102,9 @@ function start(){
 
         if (seconds < 10) {
             seconds = "0" + seconds;
+        } 
+        if(t===0){
+            nUnanswered++;
         }
         return seconds;
     }
@@ -100,10 +112,15 @@ function start(){
     //correct guess GIF
     function correct() {
         $("#image-holder").html("<img src='assets/images/giphy.gif' width='200px'>");
+        setTimeout(nextQuestion, 6000);
+
     }
     //incorrect guess GIFF
     function incorrect() {
-        $("#image-holder").html("<img src='assets/images/wrong.gif' width='200px'>");
+
+        $("#image-holder").html("Correct answer: "+ aTrivia[nCounter-1].a+ "<img src='assets/images/wrong.gif' width='200px'>");
+        setTimeout(nextQuestion, 6000);
+
     }
 
     //functions==========================================================================
@@ -120,31 +137,33 @@ function start(){
 
     //display questions for 30 seconds each
 
-
+    var value;
     // click event
     $(".option").live("click", function () {
-        var value = $(this).attr('id');
+        value = $(this).attr('id');
         console.log(this);
 
-        if (value === "c") {
+        if (value === "c" && bAnswered===false) {
             nCorrect++;
+            bAnswered=true;
             //play winner gif
             correct();
-        } else if (value === "w") {
+        } else if (value === "w" && bAnswered===false) {
+            bAnswered=true;
             nIncorrect++
+            // value;
+            // console.log(value)
             incorrect();
         } else if(value === "again"){
             nCounter = 0;
-            nTime = 31;
+            nTime = 30;
             nCorrect = 0;
             nIncorrect = 0;
             nUnanswered = 0;
             option.children().remove();
             question.empty();
             nextQuestion();
-            intervalID = setInterval(count, 1000);
-            qInterval = setInterval(nextQuestion, 5000);
-
+            start();
         }
     });
 
