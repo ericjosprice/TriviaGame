@@ -26,3 +26,12 @@ body {
   img{
       margin:0 auto;
   }
+
+  button {
+    color: rgb(104, 1, 104);
+    border: none;
+    background-color: rgba(175, 143, 156, 0);
+    font-size: 22px;
+    font-weight: 700;
+
+  }
