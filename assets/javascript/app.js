@@ -85,8 +85,7 @@ $(document).ready(function () {
         } else {
             clearInterval(intervalID);
             clearInterval(qInterval);
-            //display time as 0 seconds
-            nTime = 0;
+            ///display score
             $("#timer").empty();
             $("#timer").text("Here is your score:");
             // option.empty();
