@@ -41,7 +41,6 @@ var nUnanswered = 0;
 var intervalID;
 var qInterval;
 var bAnswered=false;
-// var bClockRunning=false;
 
 //varriables
 //=======================================================================
@@ -74,7 +73,7 @@ function start(){
             option.append("<span  id='c' class='option'>" + aTrivia[nCounter].a + "</span>" + "<br>");
             //wrong options
             for (var i = 0; i <= 2; i++) {
-                var newSpan = $("<span id='w'>");
+                var newSpan = $("<button id='w'>");
                 newSpan.attr('class', 'option');
                 newSpan.html(aTrivia[nCounter].w[i] + "<br>");
                 option.append(newSpan);
@@ -86,7 +85,7 @@ function start(){
             // option.empty();
             question.empty();
             question.html("Correct: " +nCorrect+ "<br>" + "Incorrect: " + nIncorrect + "<br>" + "Unanswered: " + nUnanswered);
-            $(".answers").html("<span  id='again' class='option'>Play Again?</span>");   $("#image-holder").empty();   
+            $(".answers").html("<button  id='again' class='option'>Play Again?</button>");   $("#image-holder").empty();   
         }
     }
 
